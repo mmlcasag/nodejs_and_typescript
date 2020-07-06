@@ -7,8 +7,13 @@
 // and then, o the index.html, you can import the .js file
 // if you're having trouble trying to run tsc app.ts
 // watch this video https://www.youtube.com/watch?v=J30n3lMyvbY
+// now we want to specify the data type for these arguments
+// and they should be number
+// so how do we do that?
 function add(num1, num2) {
     return num1 + num2;
 }
+// which data types are possible?
+// number, string, boolean, object, Array
 console.log(add(3, 2));
 console.log(add('3', '2'));
