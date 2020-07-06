@@ -1,10 +1,28 @@
 "use strict";
-var num1Element = document.getElementById('num1');
-var num2Element = document.getElementById('num2');
-var buttonElement = document.querySelector('button');
+const num1Element = document.getElementById('num1');
+const num2Element = document.getElementById('num2');
+const buttonElement = document.querySelector('button');
 // this is how to work with arrays in typescript
-var numResults = [];
-var strResults = [];
+// array is a generic type
+// why? because array is a data type
+// ok, but an array made of what?
+// made of string, made of number, etc.
+// the correct way of calling an array is this:
+const numResults = [];
+const strResults = [];
+// promises are another generic type
+const myPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('It worked!');
+    }, 1000);
+});
+myPromise
+    .then(result => {
+    console.log(result);
+})
+    .catch(err => {
+    console.log(err);
+});
 // union types
 // this means our function accepts both string and number arguments
 function add(num1, num2) {
@@ -31,14 +49,14 @@ function printResult(result) {
     console.log(result.val);
 }
 if (buttonElement) {
-    buttonElement.addEventListener('click', function () {
-        var num1 = num1Element.value; // know we know that we have a value property in the HTMLInputElement
-        var num2 = num2Element.value; // know we know that we have a value property in the HTMLInputElement
+    buttonElement.addEventListener('click', () => {
+        const num1 = num1Element.value; // know we know that we have a value property in the HTMLInputElement
+        const num2 = num2Element.value; // know we know that we have a value property in the HTMLInputElement
         // since our function accepts both string and number arguments this will pass
-        var resultNumber = add(+num1, +num2);
+        const resultNumber = add(+num1, +num2);
         numResults.push(resultNumber);
         // since our function accepts both string and number arguments this will pass
-        var resultString = add(num1, num2);
+        const resultString = add(num1, num2);
         strResults.push(resultString);
         console.log(numResults);
         console.log(strResults);

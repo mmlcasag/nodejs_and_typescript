@@ -3,8 +3,31 @@ const num2Element = document.getElementById('num2') as HTMLInputElement;
 const buttonElement = document.querySelector('button') as HTMLButtonElement;
 
 // this is how to work with arrays in typescript
-const numResults: number[] = [];
-const strResults: string[] = [];
+// array is a generic type
+// why? because array is a data type
+// ok, but an array made of what?
+// made of string, made of number, etc.
+// the correct way of calling an array is this:
+const numResults: Array<number> = [];
+const strResults: Array<string> = [];
+
+// promises are another generic type
+// why is it a generic type?
+// because a promise eventually resolves
+// and when it resolves we need to know which data type it is
+const myPromise = new Promise<string>((resolve, reject) => {
+    setTimeout(() => {
+        resolve('It worked!'); // this promise returns a string when it resolves
+    }, 1000);
+});
+
+myPromise
+    .then(result => {
+        console.log(result);
+    })
+    .catch(err => {
+        console.log(err);
+    });
 
 // you can also create type alias
 // this can be specially handy for union types, for example:
