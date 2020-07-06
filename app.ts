@@ -6,9 +6,20 @@ const buttonElement = document.querySelector('button') as HTMLButtonElement;
 const numResults: number[] = [];
 const strResults: string[] = [];
 
+// you can also create type alias
+// this can be specially handy for union types, for example:
+type NumOrString = number | string;
+// or for objects, for example:
+type Result = { val: string };
+
+// regarding the object example, you can also do that by using interfaces:
+interface ResultObject {
+    val: String;
+}
+
 // union types
 // this means our function accepts both string and number arguments
-function add(num1: number | string, num2: number | string) {
+function add(num1: NumOrString, num2: NumOrString) {
     // this is called type guard
     
     // if you passed number and number you want to add values
@@ -28,7 +39,7 @@ function add(num1: number | string, num2: number | string) {
 // using object types
 // we can specify the structure of the object we are expecting
 // or we can specify the object as in line 1
-function printResult(result: { val: string }) {
+function printResult(result: ResultObject) {
     console.log(result.val);
 }
 
