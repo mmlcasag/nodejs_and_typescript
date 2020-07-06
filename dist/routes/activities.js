@@ -14,9 +14,11 @@ router.get('/activities', (req, res, next) => {
     });
 });
 router.post('/activity', (req, res, next) => {
+    const body = req.body;
+    const description = body.description;
     const newActivity = {
         id: new Date().toISOString(),
-        description: req.body.description
+        description: description
     };
     ActivitiesRepository.push(newActivity);
     res.status(201).json({
@@ -26,12 +28,15 @@ router.post('/activity', (req, res, next) => {
     });
 });
 router.put('/activity/:id', (req, res, next) => {
-    const activityId = req.params.id;
+    const params = req.params;
+    const activityId = params.id;
+    const body = req.body;
+    const description = body.description;
     const activityIndex = ActivitiesRepository.findIndex(activity => activity.id === activityId);
     if (activityIndex >= 0) {
         ActivitiesRepository[activityIndex] = {
             id: ActivitiesRepository[activityIndex].id,
-            description: req.body.description
+            description: description
         };
         return res.status(200).json({
             result: 'success',
@@ -47,7 +52,8 @@ router.put('/activity/:id', (req, res, next) => {
     }
 });
 router.delete('/activity/:id', (req, res, next) => {
-    const activityId = req.params.id;
+    const params = req.params;
+    const activityId = params.id;
     ActivitiesRepository = ActivitiesRepository.filter(activity => activity.id !== activityId);
     return res.status(200).json({
         result: 'success',
