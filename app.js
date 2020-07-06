@@ -1,23 +1,35 @@
 "use strict";
-var num1Element = document.getElementById('num1'); // type casting
-var num2Element = document.getElementById('num2'); // type casting
-var buttonElement = document.querySelector('button'); // type casting
+var num1Element = document.getElementById('num1');
+var num2Element = document.getElementById('num2');
+var buttonElement = document.querySelector('button');
+// union types
+// this means our function accepts both string and number arguments
 function add(num1, num2) {
-    return num1 + num2;
+    // this is called type guard
+    // if you passed number and number you want to add values
+    if (typeof num1 === 'number' && typeof num2 === 'number') {
+        return num1 + num2;
+        // if you passed string and string you want to concatenate values
+    }
+    else if (typeof num1 === 'string' && typeof num2 === 'string') {
+        return num1 + num2;
+        // otherwise you could throw an error
+        // i decided to convert both arguments to number and add them
+        // this would execute for (number and string) and (string and number)
+    }
+    else {
+        return +num1 + +num2;
+    }
 }
 if (buttonElement) {
     buttonElement.addEventListener('click', function () {
         var num1 = num1Element.value; // know we know that we have a value property in the HTMLInputElement
         var num2 = num2Element.value; // know we know that we have a value property in the HTMLInputElement
-        var result = add(+num1, +num2); // raises error if i don't explicitly convert it to number
-        console.log(result);
+        // since our function accepts both string and number arguments this will pass
+        var resultNumber = add(+num1, +num2);
+        console.log('resultNumber: ' + resultNumber);
+        // since our function accepts both string and number arguments this will pass
+        var resultString = add(num1, num2);
+        console.log('resultString: ' + resultString);
     });
 }
-// configuring typescript
-// tsc --init
-// this adds a tsconfig.json file to the project
-// one specific important configuration you can set in that file is the strict option
-// this option checks where you might get a possibly null
-// also you have not set data type and so on
-// if you have created a tsconfig.json file to your project
-// you must not use tsc app.ts anymore, now you just use tsc and that's it!
