@@ -2,6 +2,10 @@ const num1Element = document.getElementById('num1') as HTMLInputElement;
 const num2Element = document.getElementById('num2') as HTMLInputElement;
 const buttonElement = document.querySelector('button') as HTMLButtonElement;
 
+// this is how to work with arrays in typescript
+const numResults: number[] = [];
+const strResults: string[] = [];
+
 // union types
 // this means our function accepts both string and number arguments
 function add(num1: number | string, num2: number | string) {
@@ -21,6 +25,13 @@ function add(num1: number | string, num2: number | string) {
     }
 }
 
+// using object types
+// we can specify the structure of the object we are expecting
+// or we can specify the object as in line 1
+function printResult(result: { val: string }) {
+    console.log(result.val);
+}
+
 if (buttonElement) {
     buttonElement.addEventListener('click', () => {
         const num1 = num1Element.value; // know we know that we have a value property in the HTMLInputElement
@@ -28,10 +39,14 @@ if (buttonElement) {
         
         // since our function accepts both string and number arguments this will pass
         const resultNumber = add(+num1, +num2);
-        console.log('resultNumber: ' + resultNumber);
+        numResults.push(resultNumber as number);
 
         // since our function accepts both string and number arguments this will pass
         const resultString = add(num1, num2);
-        console.log('resultString: ' + resultString);
+        strResults.push(resultString as string);
+
+        console.log(numResults);
+        console.log(strResults);
+        printResult({ val: resultString as string });
     });
 }
