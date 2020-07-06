@@ -2,6 +2,7 @@
 // you have to install this: npm install --save-dev @types/node
 // this lets typescript know nodejs specific commands and how to translate them into javascript
 import express from 'express';
+import bodyParser from 'body-parser';
 
 import activitiesRoutes from './routes/activities';
 
@@ -9,6 +10,7 @@ import activitiesRoutes from './routes/activities';
 // npm install --save-dev @types/express
 const app = express();
 
+app.use(bodyParser.json());
 app.use(activitiesRoutes);
 
 app.listen(3000);
